@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solar Tracker — Connexion</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body class="centered">
+<div class="card">
+<h1>Solar Tracker</h1>
+<p class="muted">Connexion administrateur</p>
+<form id="loginForm" autocomplete="on">
+<label>Utilisateur<input type="text" id="user" required autocomplete="username" value="admin"></label>
+<label>Mot de passe<input type="password" id="pass" required autocomplete="current-password"></label>
+<button type="submit">Connexion</button>
+<p id="err" class="err"></p>
+</form>
+</div>
+<script>
+document.getElementById('loginForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const user = document.getElementById('user').value;
+  const pass = document.getElementById('pass').value;
+  const err = document.getElementById('err');
+  err.textContent = '';
+  try {
+    const r = await fetch('/api/login', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({user, pass})
+    });
+    const j = await r.json().catch(() => ({}));
+    if (r.ok && j.ok) {
+      location.href = '/';
+    } else {
+      err.textContent = 'Identifiants invalides ou IP bloquée (10 min après 5 échecs).';
+    }
+  } catch (ex) {
+    err.textContent = 'Erreur réseau';
+  }
+});
+</script>
+</body>
+</html>
