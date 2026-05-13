@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solar Tracker — Dashboard</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+<h1>Solar Tracker</h1>
+<button id="logout" class="btn-secondary">Déconnexion</button>
+</header>
+
+<main>
+<p id="firstBootWarn" class="warn card" hidden>
+<strong>Premier démarrage :</strong> change le mot de passe administrateur (par défaut <code>admin / admin</code>).
+</p>
+
+<section class="card">
+<h2>Temps réel</h2>
+<div class="live">
+<div class="metric">
+<span class="lbl">Réseau (conso / injection)</span>
+<span class="val" id="main">--</span><span class="unit">W</span>
+<span class="ok" id="mainOk" title="Status">●</span>
+</div>
+<div class="metric">
+<span class="lbl">Production solaire</span>
+<span class="val" id="solar">--</span><span class="unit">W</span>
+<span class="ok" id="solarOk" title="Status">●</span>
+</div>
+</div>
+<canvas id="chart"></canvas>
+<p class="muted small">Jaune = réseau, vert = solaire. Valeur positive = consommation, négative = injection.</p>
+</section>
+
+<section class="card">
+<h2>WiFi</h2>
+<form id="wifiForm">
+<label>SSID<input type="text" id="ssid" required></label>
+<label>Mot de passe<input type="password" id="wpass" placeholder="(vide = ne pas changer)"></label>
+<button type="submit">Enregistrer et redémarrer</button>
+</form>
+</section>
+
+<section class="card">
+<h2>Shellys</h2>
+<form id="shellyForm">
+<label>URL Shelly réseau (id 0)
+<input type="url" id="urlMain" placeholder="http://192.168.1.50/rpc/EM1.GetStatus?id=0">
+</label>
+<label>URL Shelly solaire (id 1)
+<input type="url" id="urlSolar" placeholder="http://192.168.1.50/rpc/EM1.GetStatus?id=1">
+</label>
+<button type="submit">Enregistrer</button>
+</form>
+</section>
+
+<section class="card">
+<h2>Mot de passe admin</h2>
+<form id="pwdForm">
+<label>Ancien mot de passe<input type="password" id="oldPass" required></label>
+<label>Nouveau mot de passe (8 caractères min)<input type="password" id="newPass" minlength="8" required></label>
+<button type="submit">Changer</button>
+</form>
+</section>
+
+<section class="card">
+<h2>OTA (mise à jour WiFi)</h2>
+<label>Mot de passe OTA actuel
+<div class="row">
+<input type="text" id="otaPass" readonly>
+<button type="button" id="copyOta" class="btn-secondary">Copier</button>
+</div>
+</label>
+<p class="muted small">À utiliser dans Arduino IDE quand tu téléverses via le port réseau. Régénérer le redémarre l'ESP32.</p>
+<button type="button" id="regenOta" class="btn-secondary">Régénérer le mot de passe OTA</button>
+</section>
+
+<section class="card">
+<h2>Système</h2>
+<ul id="sysInfo"></ul>
+</section>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>

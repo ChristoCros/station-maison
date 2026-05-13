@@ -1,0 +1,61 @@
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  background: #0f1419; color: #eee; margin: 0; padding: 16px;
+}
+body.centered {
+  display: flex; min-height: 100vh; align-items: center; justify-content: center;
+}
+header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; max-width: 720px;
+}
+h1 { margin: 0; font-size: 1.4rem; color: #fdd835; }
+h2 { font-size: 1.05rem; margin: 0 0 12px; color: #fff; }
+.muted { color: #888; }
+.small { font-size: 0.8rem; }
+code { background: #2a323c; padding: 1px 6px; border-radius: 3px; }
+.card {
+  background: #1c2229; border: 1px solid #2a323c; border-radius: 8px;
+  padding: 16px; margin-bottom: 16px; max-width: 720px;
+}
+.centered .card { width: 100%; max-width: 360px; }
+form { display: flex; flex-direction: column; gap: 12px; }
+label { display: flex; flex-direction: column; font-size: 0.85rem; color: #bbb; gap: 4px; }
+input {
+  padding: 9px 10px; background: #0f1419; border: 1px solid #2a323c;
+  color: #fff; border-radius: 4px; font-size: 1rem;
+}
+input:focus { outline: none; border-color: #fdd835; }
+button {
+  padding: 10px 16px; background: #fdd835; color: #000;
+  border: none; border-radius: 4px; font-weight: 600;
+  cursor: pointer; font-size: 0.95rem;
+}
+button:hover { background: #fbc02d; }
+.btn-secondary { background: #2a323c; color: #eee; }
+.btn-secondary:hover { background: #3a424c; }
+.live {
+  display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 16px;
+}
+.metric { display: flex; flex-direction: column; }
+.metric .lbl {
+  font-size: 0.7rem; color: #888;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.metric .val { font-size: 2.4rem; font-weight: 700; color: #fff; line-height: 1; }
+.metric .unit { font-size: 0.9rem; color: #888; margin-top: 4px; }
+.metric .ok { font-size: 0.9rem; color: #4caf50; }
+.metric .ok.stale { color: #f44336; }
+.err { color: #f44336; min-height: 1.2em; margin: 0; }
+.warn { color: #fb8c00; border-color: #fb8c00; }
+#chart {
+  width: 100%; height: 180px; background: #0f1419;
+  border-radius: 4px; display: block;
+}
+ul { list-style: none; padding: 0; margin: 0; font-size: 0.85rem; color: #aaa; }
+li { padding: 6px 0; border-bottom: 1px solid #2a323c; }
+li:last-child { border-bottom: none; }
+.row { display: flex; gap: 8px; align-items: stretch; }
+.row input { flex: 1; font-family: ui-monospace, "SF Mono", monospace; }
+.row button { flex-shrink: 0; }
