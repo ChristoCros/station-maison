@@ -1,0 +1,41 @@
+# --- OS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Editors / IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.history/
+
+# --- Arduino IDE build artifacts ---
+# (par défaut Arduino IDE compile dans ~/Library/..., mais "Show verbose"
+#  ou des configs custom peuvent générer ces fichiers dans le sketch)
+build/
+*.bin
+*.hex
+*.elf
+*.map
+*.partitions
+
+# --- Backups ---
+*.bak
+*.orig
+*.rej
+
+# --- Secrets locaux éventuels ---
+# Si un jour tu mets des credentials en dur dans un fichier local
+# (déconseillé — préfère NVS), ces noms classiques sont ignorés.
+secrets.h
+secrets.cpp
+.env
+.env.*
+
+# --- Logs ---
+*.log
