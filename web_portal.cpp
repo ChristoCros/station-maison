@@ -72,22 +72,23 @@ static void sendStatus(AsyncWebServerRequest* req) {
   sendJson(req, 200, out);
 }
 
+static bool wsHandshakeAuth(AsyncWebServerRequest* req) {
+  if (!req->hasHeader("Cookie")) return false;
+  String cookie = req->header("Cookie");
+  int idx = cookie.indexOf("session=");
+  if (idx < 0) return false;
+  int end = cookie.indexOf(';', idx);
+  if (end < 0) end = cookie.length();
+  String token = cookie.substring(idx + 8, end);
+  return Auth::validateToken(token);
+}
+
 static void onWsEvent(AsyncWebSocket* /*server*/, AsyncWebSocketClient* client,
                       AwsEventType type, void* /*arg*/, uint8_t* /*data*/, size_t /*len*/) {
   if (type == WS_EVT_CONNECT) {
-    AsyncWebServerRequest* req = client->request();
-    if (!req || !req->hasHeader("Cookie")) {
-      client->close(4001, "unauth");
-      return;
-    }
-    String cookie = req->header("Cookie");
-    int idx = cookie.indexOf("session=");
-    if (idx < 0) { client->close(4001, "unauth"); return; }
-    int end = cookie.indexOf(';', idx);
-    if (end < 0) end = cookie.length();
-    String token = cookie.substring(idx + 8, end);
-    if (!Auth::validateToken(token)) { client->close(4001, "unauth"); return; }
-    Serial.printf("[WS] Client %u authenticated\n", client->id());
+    Serial.printf("[WS] Client %u connected\n", client->id());
+  } else if (type == WS_EVT_DISCONNECT) {
+    Serial.printf("[WS] Client %u disconnected\n", client->id());
   }
 }
 
@@ -192,6 +193,7 @@ void WebPortal::begin() {
     scheduleReboot();
   });
 
+  ws.handleHandshake(wsHandshakeAuth);
   ws.onEvent(onWsEvent);
   server.addHandler(&ws);
 
