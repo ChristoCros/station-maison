@@ -1,6 +1,14 @@
-# Solar Tracker — ESP32 + Shelly EM
+# Station Maison — suivi électrique
 
-Moniteur de consommation/production électrique : un ESP32 lit deux Shelly EM (réseau + production solaire), affiche les valeurs sur un OLED 128x64, pilote des LEDs de seuils, et expose un dashboard web protégé par login.
+Module ESP32 + Shelly EM de la Station Maison : suivi du prélèvement réseau et du surplus photovoltaïque, écran OLED, LEDs à seuils et dashboard local.
+
+## Boîtier de la Station Maison
+
+Rendus de conception du boîtier ouvert multi-écrans. Ils montrent un concept, pas un exemplaire déjà imprimé. Ce dépôt documente le module ESP32 + Shelly ; le firmware Pico et les fichiers de fabrication ne sont pas fournis ici.
+
+| Vue avant | Vue arrière |
+| --- | --- |
+| ![Vue avant du boîtier Station Maison](docs/images/station-maison-front.png) | ![Vue arrière du boîtier Station Maison](docs/images/station-maison-rear.png) |
 
 ## Vue d'ensemble
 
